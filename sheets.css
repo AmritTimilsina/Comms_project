@@ -1,23 +1,190 @@
-html body {
-  background-color: rgb(197, 197, 197);
+@font-face {
+  font-family: "Monocraft";
+  src: url("assets/Fonts/Monocraft.ttf");
 }
 
-.n {
-  background-color: rgb(179, 179, 179);
-  border: none;
-  color: rgb(255, 0, 0);
-  height: 40px;
-  border-radius: 80px;
-  width: 140px;
-  size: 16px;
-  font-weight: bold;
-  font-size: 15px;
-  transition: background-color 0.9s;
-  box-shadow: 3px 3px 10px 2px rgba(0, 0, 0, 0.25);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.n:hover {
-  background-color: rgb(255, 0, 0);
-  cursor: pointer;
-  color: rgb(177, 177, 177);
+body {
+  font-family: "Monocraft", monospace;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  cursor: url("assets/cursor/Pink Arrow & Heart--pointer--SweezyCursors (1).png"), auto;
+}
+
+
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 120%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background-image: url("assets/Images/Small Fresh Spring Flowers Hd Background Backgrounds _ PSD Free Download - Pikbest.png");
+  background-size: cover;
+  background-position: center;
+}
+
+
+.animator {
+  width: 20ch;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid black;
+  font-size: 3.5vw;
+  line-height: 4vw;
+
+  color: #e64545;
+  position: absolute;
+  top: 50%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  animation:
+    typing 3s steps(20) forwards,
+    grow 1s ease-in-out 3.5s forwards,
+    cursor 0.75s step-end infinite;
+
+}
+
+@keyframes cursor {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 27ch;
+  }
+}
+
+@keyframes grow {
+  from {
+    font-size: 3.5vw;
+    line-height: 4vw;
+
+    top: 50%;
+    left: 53%;
+    border-right: none;
+  }
+
+  to {
+    font-size: 5vw;
+    line-height: 6vw;
+
+    top: 10%;
+    left: 53%;
+    border-right: none;
+  }
+}
+
+.top {
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 78%;
+}
+
+.times {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  top: 34%;
+
+  bottom: 30%;
+  left: 13%;
+  right: 13%;
+  border-radius: 23px;
+  animation:
+    appear 3s ease-in-out forwards;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+
+  }
+
+  to {
+    opacity: 1;
+
+  }
+}
+
+
+
+.h,
+.m,
+.s {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: rgb(236, 182, 182);
+  justify-content: space-between;
+  color: rgb(226, 226, 226);
+  margin: 0.7vh;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  font-size: 420%;
+  height: 140%;
+  width: 110%;
+  min-width: 0;
+  flex-shrink: 1;
+  position: relative;
+}
+
+.s .top {
+  font-size: 70%;
+}
+
+.bottom {
+  font-size: 150%;
+
+}
+
+.lolz {
+  display: flex;
+  background-color: rgb(236, 182, 182);
+  color: white;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  height: 33%;
+  width: 8%;
+  margin-top: auto;
+  font-size: 300%;
+  transform: translate(0, 60.7%);
+  pointer-events: none;
+}
+
+
+.lock {
+  display: flex;
+  position: absolute;
+  bottom: 7%;
+  left: 35%;
+  height: 9%;
+  width: 50vh;
+}
+
+.locki {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: rgb(110, 110, 110) 9px 15px 20px;
+  animation:
+    appear 3s ease-in-out forwards;
 }
