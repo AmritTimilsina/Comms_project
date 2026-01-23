@@ -76,13 +76,16 @@ body {
   font-size: 3.5vw;
   line-height: 4vw;
 
-  color: #e64545;
+  color: #D78A9A;
   position: absolute;
-  top: 50%;
-  left: 53%;
+
+
+
+  top: 50vh;
+  left: 53vw;
+
   transform: translate(-50%, -50%);
-  animation:
-    typing 3s steps(20) forwards,
+  animation: typing 3s steps(20) forwards,
     grow 1s ease-in-out 3.3s forwards,
     cursor 0.75s step-end infinite;
   will-change: transform;
@@ -108,12 +111,14 @@ body {
 
 @keyframes grow {
   from {
+    top: 50vh;
     transform: translate(-50%, -50%) scale(1);
     border-right: none;
   }
 
   to {
-    transform: translate(-50%, -560%) scale(1.4);
+    top: 12vh;
+    transform: translate(-50%, -50%) scale(1.4);
     border-right: none;
   }
 }
