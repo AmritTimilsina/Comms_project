@@ -1,4 +1,5 @@
 const text = document.getElementById("typingText");
+const sound = document.getElementById("clickSound");
 let diff;
 let spanh, spanm, spans, spansec;
 let timer;
@@ -61,10 +62,9 @@ text.addEventListener("animationend", (e) => {
     const message = document.getElementById("message");
 
     myBtn.addEventListener("click", () => {
+      sound.currentTime = 0; // restart sound
+      sound.play();
       if (diff > 0) {
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
 
         message.textContent = `Time xa ajhai puntu roknus `;
         message.style.opacity = "1";
