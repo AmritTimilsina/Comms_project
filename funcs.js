@@ -1,17 +1,21 @@
 const text = document.getElementById("typingText");
-
+let diff;
 let spanh, spanm, spans, spansec;
 let timer;
 
-// ✅ Fixed: Feb 20, 2026 at 11:59 AM (month is 0-indexed, so 1 = February)
 const target = new Date(2026, 1, 20, 11, 59, 0);
 
 function updateTimer() {
   const now = new Date();
-  const diff = target - now;
+  diff = target - now;
 
   if (diff <= 0) {
-    console.log("🎉 TIME'S UP 🎉");
+
+    const reslock = document.querySelector(".resultlock");
+    if (reslock) {
+      reslock.innerHTML = `Thank you for the wait baby`;
+      reslock.style.opacity = "1";
+    }
     clearInterval(timer);
     return;
   }
@@ -29,12 +33,11 @@ function updateTimer() {
 
 const times = document.querySelector(".times");
 const lock = document.querySelector(".lock");
+
 text.addEventListener("animationend", (e) => {
   if (e.animationName !== "typing") return;
 
   setTimeout(() => {
-
-
     times.innerHTML = `
       <div class="h"><span class="top">Days</span><span class="bottom"></span></div>
       <div class="m"><span class="top">Hours</span><span class="bottom"></span></div>
@@ -42,7 +45,7 @@ text.addEventListener("animationend", (e) => {
       <div class="lolz"></div>
     `;
 
-    lock.innerHTML = `<button type="button" class="locki">UNLOCK</button>`;
+    lock.innerHTML = `<button type="button" class="locki" id="myBtn"><img class="piclock" src="assets/Images/New Project (6).png" alt="Locked for now"></button>`;
 
     document.body.appendChild(times);
 
@@ -52,7 +55,28 @@ text.addEventListener("animationend", (e) => {
     spansec = times.querySelector(".lolz");
 
     updateTimer();
-    timer = setInterval(updateTimer, 1000); // ✅ Update every second
+    timer = setInterval(updateTimer, 1000);
+
+    const myBtn = document.getElementById("myBtn");
+    const message = document.getElementById("message");
+
+    myBtn.addEventListener("click", () => {
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+        message.textContent = `Time xa ajhai puntu roknus `;
+        message.style.opacity = "1";
+
+        setTimeout(() => {
+          message.style.opacity = "0";
+        }, 3000);
+      } else {
+        message.textContent = "Thank you for the wait baby";
+        message.style.opacity = "1";
+      }
+    });
 
   }, 0);
 });
