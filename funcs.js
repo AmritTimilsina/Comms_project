@@ -111,14 +111,14 @@ text.addEventListener("animationend", (e) => {
       sound.play();
       if (diff > 0) {
 
-        message.textContent = `Time xa ajhai puntu roknus `;
+        message.textContent = `lol bih`; //Time xa ajhai puntu roknus
         message.style.opacity = "1";
 
         setTimeout(() => {
           message.style.opacity = "0";
         }, 3000);
       } else {
-        message.textContent = "Thank you for the wait baby";
+        message.textContent = "Thank you for the wait baby"; //Thank you for the wait baby
         message.style.opacity = "1";
       }
     });
