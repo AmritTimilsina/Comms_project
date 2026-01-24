@@ -111,7 +111,7 @@ text.addEventListener("animationend", (e) => {
       sound.play();
       if (diff > 0) {
 
-        message.textContent = `lol bih`; //Time xa ajhai puntu roknus
+        message.textContent = `Time xa ajhai puntu roknus`; //
         message.style.opacity = "1";
 
         setTimeout(() => {
