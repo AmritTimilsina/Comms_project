@@ -1,5 +1,9 @@
+
+
 const text = document.getElementById("typingText");
 const sound = document.getElementById("clickSound");
+const bg = document.querySelector(".bg");
+const bgmusic = document.querySelector(".bgMusic");
 let diff;
 let spanh, spanm, spans, spansec;
 let timer;
@@ -32,11 +36,52 @@ function updateTimer() {
   spansec.textContent = seconds;
 }
 
+
 const times = document.querySelector(".times");
 const lock = document.querySelector(".lock");
 
 text.addEventListener("animationend", (e) => {
   if (e.animationName !== "typing") return;
+
+
+  function createPetal() {
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+
+
+    petal.style.left = Math.random() * 100 + 'vw';
+
+
+    const duration = 8 + Math.random() * 10;
+    petal.style.animationDuration = duration + 's';
+
+    petal.style.animationDelay = Math.random() * 3 + 's';
+
+
+    const size = 12 + Math.random() * 8;
+    petal.style.width = size + 'px';
+    petal.style.height = size + 'px';
+
+    const colors = ['#f7b3b3', '#ffc8dd', '#dfbdc9', '#ffd6e8', '#ebb0ce'];
+    petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+    document.body.appendChild(petal);
+
+
+    setTimeout(() => {
+      petal.remove();
+    }, (duration + 9) * 1000);
+  }
+
+
+  for (let i = 0; i < 20; i++) {
+    setTimeout(() => createPetal(), i * 200);
+  }
+
+
+  setInterval(() => {
+    createPetal();
+  }, 1000);
 
   setTimeout(() => {
     times.innerHTML = `
@@ -80,3 +125,18 @@ text.addEventListener("animationend", (e) => {
 
   }, 0);
 });
+
+
+document.body.addEventListener("click", () => {
+  bgmusic.volume = 0.2;
+  bgmusic.play();
+});
+
+
+
+
+
+
+
+
+

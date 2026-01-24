@@ -17,6 +17,37 @@ body {
   cursor: url("./assets/cursor/Pink Arrow & Heart--pointer--SweezyCursors (1).png"), auto;
 }
 
+.petal {
+  position: absolute;
+  top: -20px;
+  width: 15px;
+  height: 15px;
+  background: #ffb7d5;
+  border-radius: 50% 0 50% 0;
+  opacity: 0.8;
+  animation: fall linear infinite;
+  transform-origin: center;
+  z-index: -1;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
+
 
 .bg {
   position: fixed;
@@ -24,8 +55,8 @@ body {
   left: 0;
   width: 120%;
   height: 100%;
-  pointer-events: none;
-  z-index: -1;
+
+  z-index: -2;
   background-image: url("./assets/Images/Small Fresh Spring Flowers Hd Background Backgrounds _ PSD Free Download - Pikbest.png");
   background-size: cover;
   background-position: center;
