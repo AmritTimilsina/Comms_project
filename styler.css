@@ -1,0 +1,709 @@
+@font-face {
+  font-family: "Monocraft";
+  src: url("assets/Fonts/Monocraft.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Monocraft", monospace;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0b2e 0%, #2e1a47 50%, #4a235a 100%);
+  overflow-x: hidden;
+  cursor: url("./assets/cursor/Pink Arrow & Heart--pointer--SweezyCursors (1).png"), auto;
+  position: relative;
+  overflow-y: auto;
+  /* Allow vertical scroll for content */
+  overflow-x: hidden;
+}
+
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 120%;
+  height: 100%;
+  z-index: -2;
+  background-image: url("./assets/Images/Small Fresh Spring Flowers Hd Background Backgrounds _ PSD Free Download - Pikbest.png");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+}
+
+.petal {
+  position: absolute;
+  top: -20px;
+  width: 12px;
+  height: 12px;
+  background: #ffb3d9;
+  border-radius: 50% 0 50% 0;
+  opacity: 0.6;
+  animation: fall linear infinite;
+  z-index: -1;
+  contain: layout style;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    /* CHANGED from 120vh to 100vh */
+    opacity: 0;
+  }
+}
+
+
+#Back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 12px 24px;
+  background: rgba(254, 193, 149, 0.2);
+  font-size: 16px;
+  color: #fec195;
+  border: 2px solid #fec195;
+  border-radius: 25px;
+
+  transition: all 0.3s ease;
+  cursor: pointer;
+  z-index: 100;
+}
+
+#Back:hover {
+  background: #fec195;
+  color: #1a0b2e;
+  box-shadow: 0 10px 30px rgba(254, 193, 149, 0.4);
+  transform: scale(1.05);
+}
+
+.header-text {
+  text-align: center;
+  padding: 140px 20px 80px;
+  color: #fec195;
+  z-index: 10;
+  position: relative;
+}
+
+.header-text h1 {
+  font-size: clamp(36px, 8vw, 52px);
+  margin-bottom: 12px;
+  text-shadow: 0 0 30px rgba(254, 193, 149, 0.6);
+  animation: glow 2s ease-in-out infinite alternate;
+  letter-spacing: 2px;
+}
+
+.header-text p {
+  font-size: clamp(16px, 4vw, 22px);
+  opacity: 0.95;
+  text-shadow: 0 0 20px rgba(254, 193, 149, 0.4);
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 30px rgba(254, 193, 149, 0.6);
+  }
+
+  to {
+    text-shadow: 0 0 40px rgba(254, 193, 149, 0.9), 0 0 60px rgba(254, 193, 149, 0.4);
+  }
+}
+
+/* PERFECT 3-COLUMN LAYOUT - Evenly spaced edge-to-edge */
+.alu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  max-width: 1000px;
+  /* Increased for edge spacing */
+  margin: 0 auto;
+  padding: 0 40px 100px;
+  /* More padding for edge breathing room */
+  justify-content: center;
+  /* Centers grid container */
+  width: 100%;
+}
+
+.itemgifts {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  padding-bottom: 20px;
+  margin-left: 0;
+  /* REMOVED - was causing left offset */
+  width: 100%;
+  /* NEW - fills grid cell evenly */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centers gift box */
+}
+
+@media (max-width: 640px) {
+  .alu {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns mobile */
+    gap: 30px;
+    padding: 0 20px;
+    max-width: 500px;
+  }
+}
+
+.gift-box {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  position: relative;
+  perspective: 1000px;
+}
+
+
+
+.box-body {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 130px;
+  border-radius: 24px 24px 18px 18px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    inset 0 4px 12px rgba(255, 255, 255, 0.25);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  overflow: hidden;
+}
+
+.box-body:hover {
+  box-shadow: #1a0b2e 10px 10px 15px;
+}
+
+.box-lid {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 50px;
+  border-radius: 28px 28px 12px 12px;
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.4),
+    inset 0 3px 10px rgba(255, 255, 255, 0.3);
+  transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: bottom;
+  overflow: hidden;
+}
+
+.itemgifts:hover .box-lid {
+  transform: translateX(-50%) rotatez(30deg) translateY(-70px);
+}
+
+.itemgifts:hover .box-body {
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.4),
+    inset 0 6px 16px rgba(255, 255, 255, 0.3);
+}
+
+/* FIXED RIBBONS - Perfect cross center */
+.ribbon {
+  position: absolute;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+/* Vertical ribbon - perfectly centered */
+.ribbon.vertical {
+  width: 18px;
+  height: 150px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Horizontal ribbon - perfectly centered */
+.ribbon.horizontal {
+  width: 150px;
+  height: 18px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Lid ribbons match exactly */
+.box-lid .ribbon.vertical {
+  height: 60px;
+}
+
+.box-lid .ribbon.horizontal {
+  width: 170px;
+}
+
+/* COLOR VARIANTS - Updated for ribbons */
+.pink .box-body {
+  background: linear-gradient(145deg, hsl(350, 85%, 75%), hsl(350, 85%, 65%));
+}
+
+.pink .box-lid {
+  background: linear-gradient(145deg, hsl(350, 90%, 70%), hsl(350, 90%, 60%));
+}
+
+.pink .ribbon {
+  background: linear-gradient(145deg, hsl(350, 90%, 70%), hsl(350, 90%, 60%));
+  box-shadow: 0 3px 12px hsla(350, 90%, 50%, 0.4);
+}
+
+.gold .box-body {
+  background: linear-gradient(145deg, hsl(45, 90%, 65%), hsl(45, 85%, 55%));
+}
+
+.gold .box-lid {
+  background: linear-gradient(145deg, hsl(40, 90%, 70%), hsl(40, 85%, 60%));
+}
+
+.gold .ribbon {
+  background: linear-gradient(145deg, hsl(40, 95%, 60%), hsl(40, 95%, 50%));
+  box-shadow: 0 3px 12px hsla(40, 95%, 45%, 0.4);
+}
+
+.lavender .box-body {
+  background: linear-gradient(145deg, hsl(280, 60%, 75%), hsl(280, 60%, 65%));
+}
+
+.lavender .box-lid {
+  background: linear-gradient(145deg, hsl(280, 65%, 70%), hsl(280, 65%, 60%));
+}
+
+.lavender .ribbon {
+  background: linear-gradient(145deg, hsl(280, 70%, 65%), hsl(280, 70%, 55%));
+  box-shadow: 0 3px 12px hsla(280, 70%, 50%, 0.4);
+}
+
+.blush .box-body {
+  background: linear-gradient(145deg, hsl(350, 70%, 80%), hsl(350, 70%, 70%));
+}
+
+.blush .box-lid {
+  background: linear-gradient(145deg, hsl(350, 75%, 75%), hsl(350, 75%, 65%));
+}
+
+.blush .ribbon {
+  background: linear-gradient(145deg, hsl(350, 80%, 70%), hsl(350, 80%, 60%));
+  box-shadow: 0 3px 12px hsla(350, 80%, 55%, 0.4);
+}
+
+.mint .box-body {
+  background: linear-gradient(145deg, hsl(160, 50%, 70%), hsl(160, 50%, 60%));
+}
+
+.mint .box-lid {
+  background: linear-gradient(145deg, hsl(160, 55%, 65%), hsl(160, 55%, 55%));
+}
+
+.mint .ribbon {
+  background: linear-gradient(145deg, hsl(160, 60%, 60%), hsl(160, 60%, 50%));
+  box-shadow: 0 3px 12px hsla(160, 60%, 45%, 0.4);
+}
+
+.coral .box-body {
+  background: linear-gradient(145deg, hsl(10, 80%, 70%), hsl(10, 80%, 60%));
+}
+
+.coral .box-lid {
+  background: linear-gradient(145deg, hsl(10, 85%, 65%), hsl(10, 85%, 55%));
+}
+
+.coral .ribbon {
+  background: linear-gradient(145deg, hsl(10, 85%, 60%), hsl(10, 85%, 50%));
+  box-shadow: 0 3px 12px hsla(10, 85%, 45%, 0.4);
+}
+
+/* Bow stays the same - inherits ribbon color */
+.bow-loop,
+.bow-knot,
+.bow-tail {
+  background: currentColor;
+  /* Uses ribbon color */
+}
+
+.pink .bow-loop,
+.pink .bow-knot,
+.pink .bow-tail {
+  background: hsl(350, 90%, 65%);
+}
+
+.gold .bow-loop,
+.gold .bow-knot,
+.gold .bow-tail {
+  background: hsl(40, 95%, 55%);
+}
+
+.lavender .bow-loop,
+.lavender .bow-knot,
+.lavender .bow-tail {
+  background: hsl(280, 70%, 60%);
+}
+
+.blush .bow-loop,
+.blush .bow-knot,
+.blush .bow-tail {
+  background: hsl(350, 80%, 65%);
+}
+
+.mint .bow-loop,
+.mint .bow-knot,
+.mint .bow-tail {
+  background: hsl(160, 60%, 55%);
+}
+
+.coral .bow-loop,
+.coral .bow-knot,
+.coral .bow-tail {
+  background: hsl(10, 85%, 55%);
+}
+
+/* Beautiful Bow */
+.bow {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bow-loop {
+  position: absolute;
+  width: 28px;
+  height: 36px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  top: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.bow-loop.left {
+  left: -20px;
+  transform: rotate(-30deg);
+}
+
+.bow-loop.right {
+  right: -20px;
+  transform: rotate(30deg);
+}
+
+.bow-knot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: inherit;
+  border-radius: 50%;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  z-index: 5;
+}
+
+.bow-tail {
+  position: absolute;
+  width: 12px;
+  height: 24px;
+  border-radius: 0 0 100% 100%;
+  top: 32px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.bow-tail.left {
+  left: 12px;
+  transform: rotate(-15deg);
+}
+
+.bow-tail.right {
+  right: 12px;
+  transform: rotate(15deg);
+}
+
+.itemgifts:hover .bow {
+  animation: bowExplode 0.8s ease-out forwards;
+}
+
+@keyframes bowExplode {
+  40% {
+    transform: translateX(-50%) scale(1.3);
+  }
+
+  100% {
+    transform: translateX(-50%) scale(0.3) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.caption {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffeef5;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+  transition: all 0.3s ease;
+  transform: translateX(0px);
+}
+
+.itemgifts:hover .caption {
+  color: #fff;
+  text-shadow: 0 0 20px rgba(254, 193, 149, 0.8);
+}
+
+/* STAR ANIMATION - Add after ribbon styles */
+.fil0 {
+  fill: #fffdef;
+}
+
+.star-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 0 #fffdef);
+}
+
+/* Stars HIDDEN inside box initially */
+.box-body .star-1 {
+  position: absolute;
+  top: -20%;
+  left: 20%;
+  width: 20px;
+  height: auto;
+  z-index: -5;
+  transition: all 0.8s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+  opacity: 0;
+}
+
+.box-body .star-2 {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  width: 14px;
+  height: auto;
+  z-index: -5;
+  transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  opacity: 0;
+}
+
+.box-body .star-3 {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  width: 6px;
+  height: auto;
+  z-index: -5;
+  transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+  opacity: 0;
+}
+
+.box-body .star-4 {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  width: 8px;
+  height: auto;
+  z-index: -5;
+  transition: all 0.6s cubic-bezier(0, 0.4, 0, 1.01);
+  opacity: 0;
+}
+
+.box-body .star-5 {
+  position: absolute;
+  top: 25%;
+  left: 45%;
+  width: 12px;
+  height: auto;
+  z-index: -5;
+  transition: all 0.7s cubic-bezier(0, 0.4, 0, 1.01);
+  opacity: 0;
+}
+
+.box-body .star-6 {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  width: 6px;
+  height: auto;
+  z-index: -5;
+  transition: all 0.9s ease;
+  opacity: 0;
+}
+
+/* STARS EXPLODE OUT when lid opens! */
+.itemgifts:hover .box-body .star-1 {
+  top: -60%;
+  left: -20%;
+  width: 25px;
+  filter: drop-shadow(0 0 12px #fffdef);
+  z-index: 20;
+  opacity: 1;
+  animation: starExplode1 1s ease-out forwards;
+}
+
+.itemgifts:hover .box-body .star-2 {
+  top: -15%;
+  left: 15%;
+  width: 18px;
+  filter: drop-shadow(0 0 12px #fffdef);
+  z-index: 20;
+  opacity: 1;
+  animation: starExplode2 1s ease-out 0.1s forwards;
+}
+
+.itemgifts:hover .box-body .star-3 {
+  top: 60%;
+  left: 30%;
+  width: 8px;
+  filter: drop-shadow(0 0 12px #fffdef);
+  z-index: 20;
+  opacity: 1;
+  animation: starExplode3 1s ease-out 0.2s forwards;
+}
+
+.itemgifts:hover .box-body .star-4 {
+  top: 35%;
+  left: 85%;
+  width: 10px;
+  filter: drop-shadow(0 0 12px #fffdef);
+  z-index: 20;
+  opacity: 1;
+  animation: starExplode4 1s ease-out 0.3s forwards;
+}
+
+.itemgifts:hover .box-body .star-5 {
+  top: 20%;
+  left: 120%;
+  width: 16px;
+  filter: drop-shadow(0 0 12px #fffdef);
+  z-index: 20;
+  opacity: 1;
+  animation: starExplode5 1s ease-out 0.4s forwards;
+}
+
+.itemgifts:hover .box-body .star-6 {
+  top: 10%;
+  left: 65%;
+  width: 8px;
+  filter: drop-shadow(0 0 12px #fffdef);
+  z-index: 20;
+  opacity: 1;
+  animation: starExplode6 1s ease-out 0.5s forwards;
+}
+
+/* Individual star explosion animations */
+@keyframes starExplode1 {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.3) rotate(180deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.8) rotate(360deg) translate(40px, -60px);
+    opacity: 0;
+  }
+}
+
+@keyframes starExplode2 {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2) rotate(90deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.7) rotate(720deg) translate(-30px, -40px);
+    opacity: 0;
+  }
+}
+
+@keyframes starExplode3 {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.1) rotate(360deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.5) rotate(180deg) translate(60px, 20px);
+    opacity: 0;
+  }
+}
+
+@keyframes starExplode4 {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.4) rotate(270deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.6) rotate(540deg) translate(80px, -10px);
+    opacity: 0;
+  }
+}
+
+@keyframes starExplode5 {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.3) rotate(180deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.4) rotate(360deg) translate(-50px, 30px);
+    opacity: 0;
+  }
+}
+
+@keyframes starExplode6 {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2) rotate(90deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.7) rotate(720deg) translate(20px, -70px);
+    opacity: 0;
+  }
+}

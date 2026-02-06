@@ -193,6 +193,18 @@ body {
   }
 }
 
+@keyframes dissappear {
+  from {
+    opacity: 1;
+
+  }
+
+  to {
+    opacity: 0;
+
+  }
+}
+
 
 
 .h,
@@ -314,3 +326,229 @@ body {
   text-align: center;
   pointer-events: none;
 }
+
+/* AFTER THAT*/
+
+.grayscaler {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+.grayscalerv {
+  position: fixed;
+  /* Add this! */
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  pointer-events: none;
+  background-color: #1a1a1a;
+  /* Changed from #ff1f1f to cinematic gray */
+  animation: grayer 1s ease-in forwards;
+}
+
+@keyframes grayer {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.3;
+  }
+}
+
+.suika1 {
+  position: fixed;
+  display: flex;
+  background-color: #0a0a0a;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  box-shadow: #0a0a0a 0px 10px 10px;
+  pointer-events: none;
+  animation:
+    blackst 2s ease-in forwards 0.5s;
+}
+
+.suika2 {
+  position: fixed;
+  display: flex;
+  background-color: #0a0a0a;
+  top: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: #0a0a0a 0px -10px 10px;
+  pointer-events: none;
+  animation:
+    blacksb 2s ease-in forwards 0.5s;
+}
+
+
+@keyframes blackst {
+  from {
+    bottom: 100%;
+
+  }
+
+  to {
+    bottom: 90%;
+
+  }
+}
+
+@keyframes blacksb {
+  from {
+    top: 100%;
+
+  }
+
+  to {
+    top: 90%;
+
+  }
+}
+
+.textieafter {
+  position: absolute;
+  top: 17%;
+  left: 10%;
+  right: 10%;
+  bottom: 17%;
+  font-size: 3.5vw;
+  line-height: 4vw;
+  color: #cfc750;
+  white-space: pre-wrap;
+  opacity: 0;
+  animation: textFade 0.6s ease forwards;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* Hide scrollbar */
+
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+
+  /* Fade effect at top and bottom */
+  -webkit-mask-image: linear-gradient(to bottom,
+      transparent 0%,
+      black 5%,
+      black 95%,
+      transparent 100%);
+  mask-image: linear-gradient(to bottom,
+      transparent 0%,
+      black 5%,
+      black 95%,
+      transparent 100%);
+}
+
+/* Hide scrollbar for Chrome/Safari */
+.textieafter::-webkit-scrollbar {
+  display: none;
+}
+
+.caret {
+  display: none;
+  margin-left: 2px;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes textFade {
+  to {
+    opacity: 1;
+  }
+}
+
+
+.continueBtn {
+  position: absolute;
+
+  top: 90%;
+  bottom: 3%;
+  left: 80%;
+  right: 5%;
+  z-index: 9999999999;
+  transform-origin: left center;
+  transform: skewX(-10deg);
+  background-color: #0a0a0a;
+  border-color: #ffb7d5;
+  border-radius: 40px;
+
+}
+
+.continueBtn:hover {
+  cursor: url("assets/cursor/Pink\ Arrow\ &\ Heart--cursor--SweezyCursors\ \(1\).png");
+  size: 1.1;
+}
+
+.removered {
+  animation:
+    dissappear 3s;
+}
+
+.removere {
+  animation:
+    graydissappear 3s;
+}
+
+@keyframes graydissappear {
+  from {
+    opacity: 0.3;
+
+  }
+
+  to {
+    opacity: 0;
+
+  }
+}
+
+.remover1 {
+  animation:
+    rem2 2s ease-in forwards;
+}
+
+@keyframes rem1 {
+  from {
+    top: 90%;
+
+  }
+
+  to {
+    top: 100%;
+
+  }
+}
+
+.remover2 {
+  animation:
+    rem1 2s ease-in forwards;
+}
+
+@keyframes rem2 {
+  from {
+    bottom: 90%;
+
+  }
+
+  to {
+    bottom: 100%;
+
+  }
+}
+
+
+/*after all shi dissapear*/

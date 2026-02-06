@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Please Wait Baby</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a0b2e 0%, #2e1a47 50%, #4a235a 100%);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fec195;
+    }
+
+    .bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffb3d9" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ff80ab" stop-opacity="0"/></radialGradient></defs><circle cx="20" cy="20" r="3" fill="url(%23a)"><animate attributeName="r" values="1;4;1" dur="3s" repeatCount="indefinite"/></circle><circle cx="80" cy="30" r="2" fill="url(%23a)"><animate attributeName="r" values="1;3;1" dur="3.5s" repeatCount="indefinite"/></circle><circle cx="40" cy="80" r="2.5" fill="url(%23a)"><animate attributeName="r" values="1;3.5;1" dur="4s" repeatCount="indefinite"/></circle></svg>') center/cover;
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    .content {
+      text-align: center;
+      max-width: 500px;
+      padding: 0 20px;
+      z-index: 10;
+      position: relative;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #fec195 0%, #ff9a9e 50%, #fec195 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      animation: glowPulse 3s ease-in-out infinite alternate;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      font-weight: 400;
+      color: rgba(254, 193, 149, 0.9);
+      margin-bottom: 2rem;
+      text-shadow: 0 0 20px rgba(254, 193, 149, 0.3);
+    }
+
+    .hearts {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .heart {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .heart:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+
+    .heart:nth-child(3) {
+      animation-delay: 1s;
+    }
+
+    .loading {
+      width: 80px;
+      height: 80px;
+      border: 4px solid rgba(254, 193, 149, 0.2);
+      border-top: 4px solid #fec195;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 2rem;
+    }
+
+    @keyframes glowPulse {
+      0% {
+        filter: drop-shadow(0 0 20px rgba(254, 193, 149, 0.5));
+        transform: scale(1);
+      }
+
+      100% {
+        filter: drop-shadow(0 0 40px rgba(254, 193, 149, 0.8));
+        transform: scale(1.02);
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-15px) rotate(10deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .float-heart {
+      position: absolute;
+      font-size: 1.2rem;
+      color: #ff9a9e;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.8;
+      }
+
+      90% {
+        opacity: 0.3;
+      }
+
+      100% {
+        transform: translateY(-100px) scale(1) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hearts {
+        gap: 0.5rem;
+      }
+
+      .heart {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-overlay"></div>
+  <div class="floating-hearts" id="hearts"></div>
+
+  <div class="content">
+    <h1>Please Wait Baby 💕</h1>
+    <p class="subtitle">Kurne manxe lai ramro hunxa ni ta</p>
+
+    <div class="loading"></div>
+
+    <div class="hearts">
+      <span class="heart">💖</span>
+      <span class="heart">💕</span>
+      <span class="heart">💗</span>
+    </div>
+
+    <p style="font-size: 1.1rem; opacity: 0.8;">roknus roknus 😘</p>
+  </div>
+
+  <script>
+    // Floating hearts animation
+    function createFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'float-heart';
+      heart.innerHTML = ['💖', '💕', '💗', '💝', '🌸'][Math.floor(Math.random() * 5)];
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDuration = (6 + Math.random() * 4) + 's';
+      document.getElementById('hearts').appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 10000);
+    }
+
+
+    setInterval(createFloatingHeart, 2000);
+
+
+    for (let i = 0; i < 3; i++) {
+      setTimeout(createFloatingHeart, i * 500);
+    }
+  </script>
+</body>
+
+</html>
