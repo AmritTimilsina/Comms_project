@@ -11,7 +11,7 @@ const grayscaler = document.querySelector(".grayscaler")
 const blacktop = document.querySelector(".blackboxtop1")
 const blackbottom = document.querySelector(".blackboxtop2")
 
-const target = new Date(2026, 1, 6, 23, 43, 40);
+const target = new Date(2026, 1, 6, 14, 15, 0);
 
 
 function thirdo() {
