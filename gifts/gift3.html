@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, My Darling 🎂</title>
+  <style>
+    /* ── FONT ── */
+    @font-face {
+      font-family: "Monocraft";
+      src: url("assets/Fonts/Monocraft.ttf");
+    }
+
+    /* ── RESET ── */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --pink: #ff6eb4;
+      --pinklt: #ffb3d9;
+      --pinkdk: #e8437a;
+      --rose: #ff8cc8;
+      --blush: #ffd6eb;
+      --deep: #3a0a1e;
+      --white: #fff0f8;
+      --glow: rgba(255, 110, 180, 0.55);
+    }
+
+    body {
+      font-family: "Monocraft", "Courier New", monospace;
+      width: 100%;
+      min-height: 100vh;
+      /* Rich multi-stop pink gradient */
+      background:
+        linear-gradient(160deg,
+          #1a0410 0%,
+          #3d0d28 15%,
+          #6b1a42 30%,
+          #8b2252 42%,
+          #a8305f 52%,
+          #c4426e 62%,
+          #d4567c 72%,
+          #e87aa0 82%,
+          #f5a0c0 92%,
+          #ffd6eb 100%);
+      overflow-x: hidden;
+      overflow-y: auto;
+      color: var(--white);
+      cursor: default;
+    }
+
+    /* ── BG OVERLAY ── */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image: url("./assets/Images/Small Fresh Spring Flowers Hd Background Backgrounds _ PSD Free Download - Pikbest.png");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.18;
+      /* Tint it pink */
+      mix-blend-mode: multiply;
+    }
+
+    /* Extra pink shimmer layer behind content */
+    .bg-shimmer {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(255, 100, 160, 0.35) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 70%, rgba(220, 50, 100, 0.3) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 10%, rgba(255, 180, 210, 0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at 10% 90%, rgba(180, 30, 80, 0.28) 0%, transparent 50%);
+      animation: shimmerShift 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes shimmerShift {
+      0% {
+        opacity: 0.7;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.04);
+      }
+
+      100% {
+        opacity: 0.75;
+        transform: scale(1.01);
+      }
+    }
+
+    /* ── TEXT PARTICLES ── */
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      /* between bg (-2) and content (10+) */
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      font-size: clamp(0.85rem, 2vw, 1.15rem);
+      font-family: "Monocraft", "Courier New", monospace;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      opacity: 0;
+      bottom: -60px;
+      left: var(--x, 50%);
+      color: var(--c, #ffb3d9);
+      text-shadow: 0 0 8px rgba(255, 110, 180, 0.6);
+      transform: rotate(var(--tilt, 0deg));
+      animation: floatUp var(--dur, 7s) ease-in var(--delay, 0s) infinite;
+
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 0;
+        transform: rotate(var(--tilt, 0deg)) translateY(0);
+      }
+
+      12% {
+        opacity: 0.9;
+      }
+
+      88% {
+        opacity: 0.5;
+      }
+
+      100% {
+        opacity: 0;
+        transform: rotate(var(--tilt, 0deg)) translateY(-110vh);
+      }
+    }
+
+    /* ══════════════════════════════
+       STAGES
+    ══════════════════════════════ */
+    .stage {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: opacity 0.75s ease;
+    }
+
+    .stage.hidden {
+      display: none;
+    }
+
+    .stage.fade-out {
+      opacity: 0 !important;
+      pointer-events: none;
+    }
+
+    /* ══════════════════════════════
+       GLOWING BUTTON
+    ══════════════════════════════ */
+    .main-btn {
+      font-family: "Monocraft", "Courier New", monospace;
+      font-size: clamp(0.82rem, 2.2vw, 1.05rem);
+      color: var(--white);
+      background: transparent;
+      border: 2px solid var(--pinklt);
+      padding: 18px 38px;
+      border-radius: 50px;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      box-shadow: 0 0 20px var(--glow), 0 0 50px rgba(255, 140, 200, 0.3);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .main-btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 40px var(--glow), 0 0 80px rgba(255, 180, 215, 0.5);
+      background: rgba(255, 110, 180, 0.12);
+    }
+
+    .main-btn:active {
+      transform: scale(0.96);
+    }
+
+    #btn-intro {
+      animation: pulseBorder 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulseBorder {
+
+      0%,
+      100% {
+        box-shadow: 0 0 18px var(--glow), 0 0 40px rgba(255, 140, 200, 0.25);
+      }
+
+      50% {
+        box-shadow: 0 0 50px rgba(255, 110, 180, 0.95), 0 0 100px rgba(255, 180, 215, 0.6);
+      }
+    }
+
+    /* ══════════════════════════════
+       CAKE STAGE
+    ══════════════════════════════ */
+    #stage-cake {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .cake-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(-120vh);
+      opacity: 0;
+      transition: none;
+    }
+
+    .cake-wrap.arrived {
+      animation: slideDown 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-120vh);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .cake-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+      /* add this */
+    }
+
+    .cake-emoji img {
+      width: clamp(760px, 25vw, 580px);
+      height: auto;
+      filter: drop-shadow(0 0 30px rgba(255, 110, 180, 0.7));
+      animation: cakeBob 3.2s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes cakeBob {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* ── candles ── */
+    .candles-row {
+      display: flex;
+      gap: 19px;
+      justify-content: center;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      position: absolute;
+      /* add this */
+      top: 325px;
+      z-index: 5;
+    }
+
+    .candle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .candle:hover {
+      transform: scale(1.2);
+    }
+
+    .candle img {
+      width: clamp(50px, 8vw, 80px);
+      height: auto;
+      filter: drop-shadow(0 0 8px rgba(255, 200, 80, 0.9));
+      transition: filter 0.45s ease;
+    }
+
+    .candle.blown img {
+      filter: drop-shadow(0 0 4px rgba(120, 80, 60, 0.4));
+    }
+
+    /* ── wish button fixed bottom ── */
+    .wish-btn-wrap {
+      position: fixed;
+      bottom: 54px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 15;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.7s ease;
+    }
+
+    .wish-btn-wrap.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ══════════════════════════════
+       CHOICES STAGE
+    ══════════════════════════════ */
+    #stage-choices {
+      animation: fadeUp 0.9s ease both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .choices-wrap {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .choice-btn {
+      font-family: "Monocraft", "Courier New", monospace;
+      font-size: clamp(0.72rem, 1.7vw, 0.9rem);
+      color: var(--white);
+      background: linear-gradient(135deg, rgba(255, 110, 180, 0.14), rgba(255, 80, 140, 0.14));
+      border: 1.5px solid var(--rose);
+      padding: 22px 28px;
+      border-radius: 18px;
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      width: clamp(165px, 25vw, 230px);
+      text-align: center;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease, background 0.28s ease;
+      box-shadow: 0 4px 20px rgba(255, 110, 180, 0.18);
+    }
+
+    .choice-btn:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 10px 44px rgba(255, 110, 180, 0.55), 0 0 28px rgba(255, 160, 200, 0.4);
+      background: linear-gradient(135deg, rgba(255, 110, 180, 0.28), rgba(255, 80, 140, 0.28));
+    }
+
+    /* ══════════════════════════════
+       PANELS
+    ══════════════════════════════ */
+    .panel {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 52px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeUp 0.65s ease both;
+    }
+
+    .panel.hidden {
+      display: none;
+    }
+
+    .back-btn {
+      font-family: "Monocraft", "Courier New", monospace;
+      font-size: 0.75rem;
+      color: var(--pink);
+      background: transparent;
+      border: 1px solid var(--pink);
+      padding: 10px 22px;
+      border-radius: 50px;
+      cursor: pointer;
+      align-self: flex-start;
+      margin-bottom: 38px;
+      transition: background 0.22s, color 0.22s;
+      letter-spacing: 0.05em;
+    }
+
+    .back-btn:hover {
+      background: var(--pink);
+      color: var(--deep);
+    }
+
+    .panel-title {
+      font-size: clamp(1rem, 2.8vw, 1.55rem);
+      color: var(--pinklt);
+      text-align: center;
+      margin-bottom: 44px;
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 22px rgba(255, 140, 200, 0.65);
+    }
+
+    /* ── Photo grid ── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 26px;
+      max-width: 820px;
+      width: 100%;
+    }
+
+    .photo-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      animation: fadeUp 0.6s ease both;
+      position: relative;
+      z-index: 1;
+      transition: z-index 0s;
+    }
+
+    .photo-card:hover {
+      z-index: 10;
+      /* pops above all other cards */
+    }
+
+    .photo-card img {
+      width: 100%;
+      border-radius: 16px;
+      border: 2px solid rgba(255, 140, 200, 0.35);
+      object-fit: cover;
+      aspect-ratio: 4/3;
+      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.38s ease;
+    }
+
+    .photo-card img:hover {
+      transform: scale(1.35);
+      box-shadow: 0 14px 52px rgba(255, 110, 180, 0.65), 0 0 32px rgba(255, 160, 210, 0.45);
+    }
+
+    .photo-card:nth-child(1) {
+      animation-delay: 0.08s;
+    }
+
+    .photo-card:nth-child(2) {
+      animation-delay: 0.16s;
+    }
+
+    .photo-card:nth-child(3) {
+      animation-delay: 0.24s;
+    }
+
+    .photo-card:nth-child(4) {
+      animation-delay: 0.32s;
+    }
+
+    .photo-card:nth-child(5) {
+      animation-delay: 0.40s;
+    }
+
+    .photo-card:nth-child(6) {
+      animation-delay: 0.48s;
+    }
+
+
+
+    .photo-caption {
+      font-size: 0.92rem;
+      color: var(--pinklt);
+      text-align: center;
+      letter-spacing: 0.06em;
+      opacity: 0.88;
+    }
+
+    /* ── Message ── */
+    .message-scroll-wrap {
+      max-width: 660px;
+      width: 100%;
+    }
+
+    .message-text {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .message-text p {
+      font-size: clamp(0.75rem, 1.8vw, 0.93rem);
+      line-height: 2.1;
+      color: var(--white);
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+      letter-spacing: 0.04em;
+    }
+
+    .message-text p.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .message-text .signature {
+      font-size: clamp(0.88rem, 2vw, 1.1rem);
+      color: var(--pinklt);
+      text-align: right;
+      margin-top: 16px;
+      text-shadow: 0 0 14px var(--glow);
+    }
+
+    /* ── Video ── */
+    .video-wrap {
+      width: 100%;
+      max-width: 780px;
+      aspect-ratio: 16/9;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 140, 200, 0.4);
+      box-shadow: 0 0 60px rgba(255, 110, 180, 0.32), 0 0 120px rgba(255, 160, 210, 0.2);
+    }
+
+    .video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 520px) {
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .choices-wrap {
+        flex-direction: column;
+      }
+
+      .choice-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+
+    .heart-left,
+    .heart-right {
+      position: fixed;
+      top: 20px;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      z-index: 11;
+      animation: heartBeat 1.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .heart-left {
+      left: 24px;
+    }
+
+    .heart-right {
+      right: 24px;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes heartBeat {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.25);
+      }
+    }
+
+    .bday-text {
+      font-size: clamp(1.2rem, 3.5vw, 2rem);
+      position: absolute;
+      top: 30px;
+      color: var(--pinklt);
+      letter-spacing: 0.12em;
+      text-shadow: 0 0 20px rgba(255, 110, 180, 0.8);
+      opacity: 0;
+      margin-bottom: 24px;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .bday-text.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="heart-left">💗💕</div>
+  <div class="heart-right">💗💕</div>
+  <div class="bg"></div>
+  <div class="bg-shimmer"></div>
+  <div id="particles"></div>
+
+  <!-- ══ STAGE 1: Intro ══ -->
+  <section class="stage" id="stage-intro">
+    <button class="main-btn" id="btn-intro">music ra cake lyam hai</button>
+  </section>
+
+  <!-- ══ STAGE 2: Cake ══ -->
+  <section class="stage hidden" id="stage-cake">
+    <div class="bday-text" id="bday-text">happy birthday my sweety baby 🎂</div>
+    <div class="cake-wrap" id="cake-wrap">
+      <div class="cake-container">
+        <div class="candles-row" id="candles-row"></div>
+        <div class="cake-emoji"><img src="cakey.png" alt="cake"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wish button (floats above cake stage) -->
+  <div class="wish-btn-wrap" id="wish-btn-wrap">
+    <button class="main-btn" id="btn-wish">candle ta nivaunus</button>
+  </div>
+
+  <!-- ══ STAGE 3: Choices ══ -->
+  <section class="stage hidden" id="stage-choices">
+    <div class="choices-wrap">
+      <button class="choice-btn" id="btn-photos">hehe some photos</button>
+      <button class="choice-btn" id="btn-message">hjr lai kura ofc</button>
+      <button class="choice-btn" id="btn-video">hmm this sorry baby</button>
+    </div>
+  </section>
+
+  <!-- ══ PANEL: Photos ══ -->
+  <section class="panel hidden" id="panel-photos">
+    <button class="back-btn" id="back-photos">← Back</button>
+    <h2 class="panel-title">Aba mero ig memories wala pictures baby</h2>
+    <div class="photo-grid" id="photo-grid"></div>
+  </section>
+
+  <!-- ══ PANEL: Message ══ -->
+  <section class="panel hidden" id="panel-message">
+    <button class="back-btn" id="back-message">← Back</button>
+    <div class="message-scroll-wrap">
+      <div class="message-text" id="message-text">
+        <p>HALLLOOOO MYYYY SWEETHEARTTT</p>
+        <p>Aja emro baby ko janmadin dheraiii subhakamnaaaa
+        </p>
+        <p>hehe hjr makes my day so much gud evry day harek din bolna kurne manxe veteko maile ahhahah me soo happy
+          happy thank you my darling for choosing and being with me cutie pie mwuahhhhhh
+
+        </p>
+        <p>hjr makes my lfie so so happy haina ba hjr bday ma ni afnai jiwan bare lekhdexu demn i really love you my
+          princessss i love love love youuuuu my babyy hope hjr have the msot woderful day everrrrr
+
+        </p>
+        <p>Mero baby mero pyaro putnuuuuuu aba ma bata dheraiii galti vaye panii j vaye paaniii i love my babyyy so
+          muchchhhhhhhh . I love you my darlingggggg mwuahhhhh</p>
+        <p>malai jaile maya garnu hunxaa hope hjr also feel loved every day of hjr ko life haiii i love you my cutie
+          patootieeeee
+        </p>
+        <p>Baby hope hjr have the best best besttttt dayyyyy everyday in life my puntu.</p>
+        <p>Happy Birthday myyy love. ✨</p>
+        <p class="signature">— sadhai tapaikoooooo ma 💜</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PANEL: Video ══ -->
+  <section class="panel hidden" id="panel-video">
+    <button class="back-btn" id="back-video">← Back</button>
+    <h2 class="panel-title">Work in progress xa k hai yo baby sorry puntu ;-;</h2>
+    <div class="video-wrap">
+      <iframe id="yt-iframe" src="" title="Birthday video" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- Music — replace src with your file -->
+  <audio id="birthday-music" loop>
+    <source src="nastelbom-happy-birthday-469282.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    /* ════════════════════════════════════════
+       CONFIG — edit these
+    ════════════════════════════════════════ */
+    const CANDLE_COUNT = 5; // how many candles on the cake
+
+    const PHOTOS = [
+      { src: "angry.png", caption: "Damn my baby angry with me" },
+      { src: "cutie.png", caption: "Absolutely stunning my baby" },
+      { src: "charmingeyes.png", caption: "THESE EYES SO PRETTYYY" },
+      { src: "mfav.png", caption: "my fav fav favvvv" },
+      { src: "sleep.png", caption: "hehe my sleeping princess" },
+      { src: "firstoithink.png", caption: "Maile pako first pic" },
+    ];
+
+    const YT_VIDEO_ID = "VIDEO_ID"; // ← Replace with your YouTube video ID
+
+    /* ════════════════════════════════════════
+       PARTICLES
+    ════════════════════════════════════════ */
+    const words = [
+      "happy birthday baby",
+      "i love you baby",
+      "mero pyari puntu",
+      "hehe puntu baby",
+      "mero mayalu",
+      "sanu",
+      "cutie pie",
+      "sweetheart",
+      "darling",
+      "honey bun",
+      "meri sanu mayalu",
+      "kanchu",
+    ];
+
+    const pinkShades = [
+      "#ffb3d9", "#ff8cc8", "#ff6eb4", "#ffd6eb",
+      "#ff99cc", "#f472a8", "#ffc2e0", "#e8437a",
+    ];
+
+    const particlesEl = document.getElementById("particles");
+
+    (function spawnParticles() {
+      for (let i = 0; i < 30; i++) {
+        const p = document.createElement("span");
+        p.className = "particle";
+        p.textContent = words[Math.floor(Math.random() * words.length)];
+        p.style.setProperty("--x", (Math.random() * 100) + "vw");
+        p.style.setProperty("--dur", (5 + Math.random() * 8) + "s");
+        p.style.setProperty("--delay", (Math.random() * 10) + "s");
+        p.style.setProperty("--c", pinkShades[Math.floor(Math.random() * pinkShades.length)]);
+        p.style.opacity = (0.25 + Math.random() * 0.45).toString();
+        // fixed tilt — tilted but never spins
+        const tilt = (Math.random() * 26 - 13).toFixed(1);
+        p.style.setProperty("--tilt", tilt + "deg");
+        particlesEl.appendChild(p);
+      }
+    })();
+
+    /* ════════════════════════════════════════
+       HELPERS
+    ════════════════════════════════════════ */
+    function show(el) {
+      el.classList.remove("hidden");
+      el.style.opacity = "0";
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        el.style.transition = "opacity 0.75s ease";
+        el.style.opacity = "1";
+      }));
+    }
+
+    function hide(el, cb) {
+      el.style.transition = "opacity 0.65s ease";
+      el.style.opacity = "0";
+      setTimeout(() => { el.classList.add("hidden"); cb && cb(); }, 680);
+    }
+
+    /* ════════════════════════════════════════
+       STAGE 1 → 2  (music + cake)
+    ════════════════════════════════════════ */
+    const music = document.getElementById("birthday-music");
+    const stageIntro = document.getElementById("stage-intro");
+    const stageCake = document.getElementById("stage-cake");
+    const cakeWrap = document.getElementById("cake-wrap");
+    const wishWrap = document.getElementById("wish-btn-wrap");
+
+    document.getElementById("btn-intro").addEventListener("click", () => {
+      music.play().catch(() => { });
+
+      hide(stageIntro, () => {
+        buildCandles();
+        stageCake.classList.remove("hidden");
+        stageCake.style.opacity = "1";
+
+        // slide cake in from above
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          cakeWrap.classList.add("arrived");
+        }));
+
+        // show wish button after cake lands
+        setTimeout(() => wishWrap.classList.add("show"), 900);
+
+        setTimeout(() => document.getElementById("bday-text").classList.add("show"), 600);
+      });
+    });
+
+    /* ════════════════════════════════════════
+       CANDLES
+    ════════════════════════════════════════ */
+    let blown = 0;
+
+    function buildCandles() {
+      const row = document.getElementById("candles-row");
+      row.innerHTML = "";
+      blown = 0;
+
+      for (let i = 0; i < CANDLE_COUNT; i++) {
+        const wrap = document.createElement("div");
+        wrap.className = "candle";
+
+        const img = document.createElement("img");
+        img.src = "light.png";
+        img.alt = "candle";
+
+        wrap.appendChild(img);
+        row.appendChild(wrap);
+
+        wrap.addEventListener("click", () => {
+          if (wrap.classList.contains("blown")) return;
+          wrap.classList.add("blown");
+          img.src = "darko.png";
+          blown++;
+
+          // pop effect
+          wrap.style.transform = "scale(0.8)";
+          setTimeout(() => wrap.style.transform = "", 220);
+
+          if (blown === CANDLE_COUNT) setTimeout(allBlown, 650);
+        });
+      }
+    }
+
+    function allBlown() {
+      // fade out cake stage + wish button, then show choices
+      [stageCake, wishWrap].forEach(el => {
+        el.style.transition = "opacity 1s ease";
+        el.style.opacity = "0";
+      });
+      setTimeout(() => {
+        stageCake.classList.add("hidden");
+        wishWrap.classList.remove("show");
+        show(stageChoices);
+      }, 1050);
+    }
+
+    /* ════════════════════════════════════════
+       STAGE 3  (choices)
+    ════════════════════════════════════════ */
+    const stageChoices = document.getElementById("stage-choices");
+
+    document.getElementById("btn-photos").addEventListener("click", () => openPanel("panel-photos", initPhotos));
+    document.getElementById("btn-message").addEventListener("click", () => openPanel("panel-message", initMessage));
+    document.getElementById("btn-video").addEventListener("click", () => openPanel("panel-video", initVideo));
+
+    function openPanel(id, initFn) {
+      stageChoices.classList.add("hidden");
+      const panel = document.getElementById(id);
+      panel.classList.remove("hidden");
+      panel.scrollTop = 0;
+      initFn && initFn();
+    }
+
+    function closePanel(id) {
+      document.getElementById(id).classList.add("hidden");
+      show(stageChoices);
+    }
+
+    document.getElementById("back-photos").addEventListener("click", () => closePanel("panel-photos"));
+    document.getElementById("back-message").addEventListener("click", () => closePanel("panel-message"));
+    document.getElementById("back-video").addEventListener("click", () => {
+      document.getElementById("yt-iframe").src = "";
+      closePanel("panel-video");
+    });
+
+    /* ════════════════════════════════════════
+       PHOTOS
+    ════════════════════════════════════════ */
+    let photosReady = false;
+    function initPhotos() {
+      if (photosReady) return;
+      photosReady = true;
+      const grid = document.getElementById("photo-grid");
+      PHOTOS.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "photo-card";
+
+        const img = document.createElement("img");
+        img.src = p.src;
+        img.alt = p.caption;
+        img.loading = "lazy";
+
+        const cap = document.createElement("p");
+        cap.className = "photo-caption";
+        cap.textContent = p.caption;
+
+
+        card.append(img, cap);
+        grid.appendChild(card);
+      });
+    }
+
+    /* ════════════════════════════════════════
+       MESSAGE  (scroll reveal)
+    ════════════════════════════════════════ */
+    let messageReady = false;
+    function initMessage() {
+      if (messageReady) return;
+      messageReady = true;
+
+      const panel = document.getElementById("panel-message");
+      const paras = document.querySelectorAll(".message-text p");
+
+      // First paragraph appears immediately
+      setTimeout(() => paras[0]?.classList.add("visible"), 300);
+
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+      }, { root: panel, threshold: 0.15 });
+
+      paras.forEach((p, i) => { if (i > 0) obs.observe(p); });
+    }
+
+    /* ════════════════════════════════════════
+       VIDEO
+    ════════════════════════════════════════ */
+    let videoReady = false;
+    function initVideo() {
+      if (videoReady) return;
+      videoReady = true;
+      document.getElementById("yt-iframe").src =
+        `https://www.youtube.com/embed/${YT_VIDEO_ID}?autoplay=1`;
+    }
+  </script>
+</body>
+
+</html>

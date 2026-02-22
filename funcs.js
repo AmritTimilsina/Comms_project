@@ -1,5 +1,6 @@
 
 
+
 const text = document.getElementById("typingText");
 const sound = document.getElementById("clickSound");
 const bg = document.querySelector(".bg");
@@ -11,7 +12,9 @@ const grayscaler = document.querySelector(".grayscaler")
 const blacktop = document.querySelector(".blackboxtop1")
 const blackbottom = document.querySelector(".blackboxtop2")
 
-const target = new Date(2026, 1, 6, 15, 25, 0);
+const target = new Date();
+
+
 
 
 function thirdo() {
@@ -157,7 +160,7 @@ function afterdone() {
 
 function updateTimer() {
   const now = new Date();
-  diff = target - now;
+  diff = 0;
 
   if (diff <= 0) {
 

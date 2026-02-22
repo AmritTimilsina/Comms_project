@@ -1,0 +1,572 @@
+/* ══════════════════════════════════════════════
+   FONTS
+══════════════════════════════════════════════ */
+@font-face {
+  font-family: "Monocraft";
+  src: url("assets/Fonts/Monocraft.ttf");
+}
+
+/* ══════════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════════ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.heart-left,
+.heart-right {
+  position: fixed;
+  top: 20px;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  z-index: 11;
+  animation: heartBeat 1.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.heart-left {
+  left: 24px;
+}
+
+.heart-right {
+  right: 24px;
+  animation-delay: 0.4s;
+}
+
+@keyframes heartBeat {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+:root {
+  --pink: #ff6eb4;
+  --purple: #c97eff;
+  --deep: #1a0b2e;
+  --mid: #2e1a47;
+  --light: #4a235a;
+  --white: #f9e8ff;
+  --glow: rgba(255, 110, 180, 0.45);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Monocraft", monospace;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0b2e 0%, #2e1a47 50%, #4a235a 100%);
+  overflow-x: hidden;
+  overflow-y: hidden;
+  cursor: url("Pink Arrow & Heart--pointer--SweezyCursors (1).png"), auto;
+  position: relative;
+  overflow-y: auto;
+  color: var(--white);
+}
+
+/* ══════════════════════════════════════════════
+   BACKGROUND LAYER
+══════════════════════════════════════════════ */
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 120%;
+  height: 100%;
+  z-index: -2;
+  background-image: url("./assets/Images/Small Fresh Spring Flowers Hd Background Backgrounds _ PSD Free Download - Pikbest.png");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+}
+
+/* ══════════════════════════════════════════════
+   PARTICLES
+══════════════════════════════════════════════ */
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  font-size: 1.1rem;
+  opacity: 0;
+  animation: floatUp var(--dur, 7s) linear var(--delay, 0s) infinite;
+  left: var(--x, 50%);
+  bottom: -40px;
+
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--tilt, 0deg)) translate(0, 0);
+  }
+
+  12% {
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: rotate(var(--tilt, 0deg)) translate(var(--sway, 20px), -55vh);
+  }
+
+  88% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(var(--tilt, 0deg)) translate(0, -110vh);
+  }
+}
+
+/* ══════════════════════════════════════════════
+   STAGES (full-screen sections)
+══════════════════════════════════════════════ */
+.stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: opacity 0.8s ease;
+}
+
+.stage.hidden {
+  display: none;
+}
+
+.stage.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════
+   MAIN BUTTON
+══════════════════════════════════════════════ */
+.main-btn {
+  font-family: "Monocraft", monospace;
+  font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+  color: var(--white);
+  background: transparent;
+  border: 2px solid var(--pink);
+  padding: 18px 36px;
+  border-radius: 50px;
+  cursor: url("./assets/cursor/Pink Arrow & Heart--pointer--SweezyCursors (1).png"), pointer;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.08em;
+  box-shadow: 0 0 20px var(--glow), 0 0 40px rgba(201, 126, 255, 0.2);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 2;
+}
+
+.main-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 110, 180, 0.18), rgba(201, 126, 255, 0.18));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.main-btn:hover::before {
+  opacity: 1;
+}
+
+.main-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 35px var(--glow), 0 0 70px rgba(201, 126, 255, 0.35);
+}
+
+.main-btn:active {
+  transform: scale(0.97);
+}
+
+/* Pulsing glow animation on intro button */
+#btn-intro {
+  animation: pulseBorder 2.5s ease-in-out infinite;
+}
+
+@keyframes pulseBorder {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px var(--glow), 0 0 40px rgba(201, 126, 255, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(255, 110, 180, 0.8), 0 0 80px rgba(201, 126, 255, 0.5);
+  }
+}
+
+/* ══════════════════════════════════════════════
+   CAKE STAGE
+══════════════════════════════════════════════ */
+#stage-cake {
+  flex-direction: column;
+  gap: 40px;
+}
+
+.cake-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cake-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.cake-emoji {
+  width: clamp(160px, 25vw, 280px);
+  height: auto;
+  filter: drop-shadow(0 0 30px rgba(255, 110, 180, 0.7));
+  animation: cakeBob 3.2s ease-in-out infinite;
+}
+
+@keyframes cakeBob {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Slide-in from top */
+.cake-wrap.slide-in {
+  animation: slideDown 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   CANDLES
+══════════════════════════════════════════════ */
+.candles-row {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.candle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: url("./assets/cursor/Pink Arrow & Heart--pointer--SweezyCursors (1).png"), pointer;
+  transition: transform 0.2s ease;
+}
+
+.candle:hover {
+  transform: scale(1.15);
+}
+
+.candle img {
+  width: clamp(100px, 69vw, 200px);
+  height: auto;
+  transition: opacity 0.4s ease;
+  filter: drop-shadow(0 0 8px rgba(255, 200, 80, 0.8));
+}
+
+.candle.blown img {
+  filter: none;
+}
+
+/* ══════════════════════════════════════════════
+   BOTTOM BUTTON (wish)
+══════════════════════════════════════════════ */
+.bottom-btn {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: none !important;
+}
+
+/* ══════════════════════════════════════════════
+   CHOICES STAGE
+══════════════════════════════════════════════ */
+#stage-choices {
+  animation: fadeIn 0.9s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.choices-wrap {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.choice-btn {
+  font-family: "Monocraft", monospace;
+  font-size: clamp(0.78rem, 1.8vw, 0.95rem);
+  color: var(--white);
+  background: linear-gradient(135deg, rgba(255, 110, 180, 0.12), rgba(201, 126, 255, 0.12));
+  border: 1.5px solid var(--purple);
+  padding: 22px 32px;
+  border-radius: 16px;
+  cursor: url("./assets/cursor/Pink Arrow & Heart--pointer--SweezyCursors (1).png"), pointer;
+  letter-spacing: 0.06em;
+  width: clamp(180px, 26vw, 240px);
+  text-align: center;
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+  box-shadow: 0 4px 24px rgba(201, 126, 255, 0.15);
+}
+
+.choice-btn:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 8px 40px rgba(255, 110, 180, 0.4), 0 0 30px rgba(201, 126, 255, 0.3);
+  background: linear-gradient(135deg, rgba(255, 110, 180, 0.22), rgba(201, 126, 255, 0.22));
+}
+
+/* ══════════════════════════════════════════════
+   PANELS (full-scroll pages)
+══════════════════════════════════════════════ */
+.panel {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow-y: auto;
+  padding: 60px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.7s ease;
+}
+
+.panel.hidden {
+  display: none;
+}
+
+.back-btn {
+  font-family: "Monocraft", monospace;
+  font-size: 0.8rem;
+  color: var(--pink);
+  background: transparent;
+  border: 1px solid var(--pink);
+  padding: 10px 22px;
+  border-radius: 50px;
+  cursor: url("./assets/cursor/Pink Arrow & Heart--pointer--SweezyCursors (1).png"), pointer;
+  align-self: flex-start;
+  margin-bottom: 40px;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.05em;
+}
+
+.back-btn:hover {
+  background: var(--pink);
+  color: var(--deep);
+}
+
+.panel-title {
+  font-size: clamp(1.1rem, 3vw, 1.7rem);
+  color: var(--purple);
+  text-align: center;
+  margin-bottom: 48px;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 20px rgba(201, 126, 255, 0.5);
+}
+
+/* ══════════════════════════════════════════════
+   PHOTO GRID
+══════════════════════════════════════════════ */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  max-width: 1160px;
+  max-height: 700px;
+  width: 100%;
+}
+
+.photo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: url("./assets/cursor/Pink Arrow & Heart--pointer--SweezyCursors (1).png"), pointer;
+  animation: fadeIn 0.6s ease both;
+}
+
+.photo-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.photo-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.photo-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.photo-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.photo-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.photo-card:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.photo-card img {
+  width: 100%;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 140, 200, 0.35);
+  object-fit: contain;
+  /* shows full image, no cropping */
+  aspect-ratio: unset;
+  /* removes forced ratio */
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.38s ease;
+}
+
+.photo-card img:hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 48px rgba(255, 110, 180, 0.5), 0 0 30px rgba(201, 126, 255, 0.3);
+}
+
+.photo-caption {
+  font-size: 0.75rem;
+  color: var(--purple);
+  text-align: center;
+  letter-spacing: 0.06em;
+  opacity: 0.85;
+}
+
+/* ══════════════════════════════════════════════
+   MESSAGE PANEL
+══════════════════════════════════════════════ */
+.message-scroll-wrap {
+  max-width: 680px;
+  width: 100%;
+  position: relative;
+}
+
+.message-text {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.message-text p {
+  font-size: clamp(0.78rem, 1.8vw, 0.95rem);
+  line-height: 2;
+  color: var(--white);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  letter-spacing: 0.04em;
+}
+
+.message-text p.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.message-text .signature {
+  font-size: clamp(0.9rem, 2.2vw, 1.15rem);
+  color: var(--pink);
+  text-align: right;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+/* ══════════════════════════════════════════════
+   VIDEO PANEL
+══════════════════════════════════════════════ */
+.video-wrap {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 16/9;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid rgba(201, 126, 255, 0.3);
+  box-shadow: 0 0 60px rgba(255, 110, 180, 0.25), 0 0 120px rgba(201, 126, 255, 0.15);
+}
+
+.video-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ══════════════════════════════════════════════
+   UTILITY
+══════════════════════════════════════════════ */
+.fade-out-anim {
+  animation: fadeOutEl 0.8s ease forwards;
+}
+
+@keyframes fadeOutEl {
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .choices-wrap {
+    flex-direction: column;
+  }
+
+  .choice-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}
